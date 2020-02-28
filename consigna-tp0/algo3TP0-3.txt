@@ -1,0 +1,112 @@
+" 7507/9502 | 2019 1C | TP0 | Enunciado 3 "
+
+| error club socio1 socio2 socio3 recaudacion cantidadDeSocios |
+
+Transcript clear.
+error := false.
+
+club := Club new.
+club establecerNombre: 'Club Social y Deportivo Orientado a Objetos'.
+club establecerTarifaSocio: 500.
+
+recaudacion := club recaudacionTotal.
+(recaudacion = 0) ifFalse: [
+	Transcript show: 'Error. La recaudación inicial del club debe ser 0.' ; cr.
+	error := true.
+].
+
+socio1 := Socio new.
+socio1 establecerNombre: 'Carlos'.
+club agregarSocio: socio1.
+
+(club esSocio: 'Carlos') ifFalse: [
+  Transcript show: 'Error. Carlos sí es socio del club.' ; cr.
+  error := true.
+].
+
+socio2 := Socio new.
+socio2 establecerNombre: 'Marcio'.
+club agregarSocio: socio2.
+
+(club esSocio: 'Marcio') ifFalse: [
+  Transcript show: 'Error. Marcio sí es socio del club.' ; cr.
+  error := true.
+].
+
+(club esSocio: 'Pablo') ifTrue: [
+  Transcript show: 'Error. Pablo no es socio del club.' ; cr.
+  error := true.
+].
+
+cantidadDeSocios := club cantidadDeSocios.
+(cantidadDeSocios = 2) ifFalse: [
+	Transcript show: 'Error. La cantidad de socios debe ser 2.' ; cr.
+	error := true.
+].
+
+club recibirPagoDe: 'Carlos'.
+club recibirPagoDe: 'Marcio'.
+
+recaudacion := club recaudacionTotal.
+(recaudacion = 1000) ifFalse: [
+	Transcript show: 'Error. La recaudación del club debe ser 1000.' ; cr.
+	error := true.
+].
+
+club establecerTarifaSocio: 800. " tarifazo "
+
+socio3 := Socio new.
+socio3 establecerNombre: 'Pablo'.
+
+club agregarSocio: socio3.
+
+cantidadDeSocios := club cantidadDeSocios.
+(cantidadDeSocios = 3) ifFalse: [
+	Transcript show: 'Error. La cantidad de socios debe ser 3.' ; cr.
+	error := true.
+].
+
+(club esSocio: 'Pablo') ifFalse: [
+  Transcript show: 'Error. Pablo ahora sí es socio del club.' ; cr.
+  error := true.
+].
+
+club recibirPagoDe: 'Pablo'.
+club recibirPagoDe: 'Carlos'.
+club recibirPagoDe: 'Marcio'.
+
+club recibirPagoDe: 'Pablo'.
+club recibirPagoDe: 'Carlos'.
+club recibirPagoDe: 'Marcio'.
+
+recaudacion := club recaudacionTotal.
+(recaudacion = 5800) ifFalse: [
+	Transcript show: 'Error. La recaudación del club debe ser 5800.' ; cr.
+	error := true.
+].
+
+cantidadDePagos := club cantidadDePagosDe: 'Marcio'.
+(cantidadDePagos = 3) ifFalse: [
+	Transcript show: 'Error. La cantidad de pagos de Marcio debe ser 3.' ; cr.
+	error := true.
+].
+
+cantidadDePagos := club cantidadDePagosDe: 'Carlos'.
+(cantidadDePagos = 3) ifFalse: [
+	Transcript show: 'Error. La cantidad de pagos de Carlos debe ser 3.' ; cr.
+	error := true.
+].
+
+cantidadDePagos := club cantidadDePagosDe: 'Pablo'.
+(cantidadDePagos = 2) ifFalse: [
+	Transcript show: 'Error. La cantidad de pagos de Pablo debe ser 2.' ; cr.
+	error := true.
+].
+
+" Resultado final. "
+error ifTrue: [
+	Transcript show: 'Resultado final: ERROR'.
+]
+ifFalse: [
+	Transcript show: 'Resultado final: OK'.
+].
